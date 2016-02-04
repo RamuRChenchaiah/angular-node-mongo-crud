@@ -1,0 +1,65 @@
+<!doctype html>
+
+<html ng-app="MyTasks">
+<head>
+	<!-- META -->
+	<meta charset="utf-8">
+	<!-- Port Views for mobile devices -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>My Tasks</title>	
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+	<style>
+		html 					{ overflow-y:scroll; }
+		body 					{ padding-top:50px; }
+		#mytaskList 				{ margin-bottom:30px; }
+		#myTaskForm 	 			{ margin-bottom:50px; }
+	</style>
+
+	<!-- SPELLS -->
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script><!-- load angular -->
+	<script src="utils/tasks-services.js"></script>
+
+</head>
+
+<!-- Initialize controller -->
+<body ng-controller="taskController">
+	<div class="container">		
+
+
+		<!-- FORM TO CREATE tasks -->
+		<div id="myTaskForm" class="row">
+			<div class="col-sm-8 col-sm-offset-2 text-center">
+				<form>
+					<div class="form-group">
+
+						<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
+						<input type="text" class="form-control input-lg text-center" placeholder="Add Task" ng-model="formData.text">
+					</div>
+						<!-- createToDo() WILL CREATE NEW tasks -->
+						<button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()"> Create Task </button>
+				</form>
+			</div>
+		</div>
+		
+		<hr>
+		<div class="row text-center"> <strong> My Tasks </strong></div>
+		<hr>
+		
+		<!-- TODO LIST -->
+		<div id="mytaskList" class="row">
+			<div class="col-sm-4 col-sm-offset-4">
+
+				<!-- LOOP OVER THE tasks IN $scope.tasks -->
+				<div class="text-center" ng-repeat="todo in tasks">
+					<label>
+						{{ todo.text }} <input type="button" value="Delete" ng-click="deleteTodo(todo._id)"> 
+					</label>
+				</div>
+
+			</div>
+		</div>		
+	</div>
+
+</body>
+</html>
