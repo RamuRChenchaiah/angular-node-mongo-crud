@@ -54,6 +54,21 @@ module.exports = function(app) {
 		});
 	});
 
+	// delete all tasks
+	app.delete('/api/tasks', function(req, res) {
+		Task.remove({}, function(err, task) {
+			if (err)
+				res.send(err);
+
+			// get and return all the tasks after you create another
+			Task.find(function(err, tasks) {
+				if (err)
+					res.send(err)
+				res.json(tasks);
+			});
+		});
+	});
+
 	// application -------------------------------------------------------------
 	app.get('*', function(req, res) {
 		res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
